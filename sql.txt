@@ -1,0 +1,34 @@
+create table privilege(
+	id serial primary key,
+	sgroup int not null,
+	mname varchar(250) not null,
+	icreate boolean not null default false,
+	iread boolean not null default false,
+	iupdate boolean not null default false,
+	idelete boolean not null default false,
+	ilist boolean not null default false,
+	irshow boolean not null default false,
+	foreign key(sgroup) references systemgroup(id)
+)
+
+create table systemgroup(
+	id serial primary key,
+	gname varchar(250) unique not null,
+	created timestamp,
+	updated timestamp not null default current_timestamp
+)
+
+create table systemuser(
+	id serail primary key,
+	email varchar(250) unique not null,
+	pass varchar(250) not null,
+	ugroup int not null,
+	foreign key(ugroup) references systemgroup(id)
+)
+
+create table category(
+	id serial primary key,
+	title varchar(250) unique not null,
+	created timestamp,
+	updated timestamp not null default current_timestamp
+)
